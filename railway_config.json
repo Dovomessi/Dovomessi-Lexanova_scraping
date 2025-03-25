@@ -1,0 +1,12 @@
+{
+  "$schema": "https://railway.app/schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pip install -r requirements.txt && playwright install"
+  },
+  "deploy": {
+    "startCommand": "python app.py",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 100
+  }
+}
