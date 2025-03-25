@@ -14,7 +14,11 @@ class BofipScraper:
 
         try:
             async with async_playwright() as p:
-                browser = await p.chromium.launch(headless=True)
+                browser = await p.chromium.launch(
+    headless=True,
+    args=["--no-sandbox", "--disable-dev-shm-usage"]
+)
+
                 page = await browser.new_page()
                 await page.goto(self.base_url, timeout=60000)
                 await page.fill("input[name='tx_bofip_pi1[search_text]']", search_terms)
