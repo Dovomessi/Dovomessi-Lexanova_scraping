@@ -16,8 +16,16 @@ class LegifranceScraper:
             async with async_playwright() as p:
                 browser = await p.chromium.launch(
     headless=True,
-    args=["--no-sandbox", "--disable-dev-shm-usage"]
+    args=[
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--disable-setuid-sandbox",
+        "--disable-software-rasterizer",
+        "--disable-extensions"
+    ]
 )
+
                 page = await browser.new_page()
                 url = f"{self.base_url}?searchField=ALL&query={search_terms}"
                 await page.goto(url, timeout=60000)
