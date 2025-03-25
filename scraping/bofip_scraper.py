@@ -16,8 +16,16 @@ class BofipScraper:
             async with async_playwright() as p:
                 browser = await p.chromium.launch(
     headless=True,
-    args=["--no-sandbox", "--disable-dev-shm-usage"]
+    args=[
+        "--no-sandbox",
+        "--disable-dev-shm-usage",
+        "--disable-gpu",
+        "--disable-setuid-sandbox",
+        "--disable-software-rasterizer",
+        "--disable-extensions"
+    ]
 )
+
 
                 page = await browser.new_page()
                 await page.goto(self.base_url, timeout=60000)
